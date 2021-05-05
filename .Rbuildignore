@@ -10,3 +10,7 @@
 ^codecov\.yml$
 ^DESCRIPTION\.bak$
 ^\./\.travis\.yml\.bak$
+^\.github$
+^autoci\.yml$
+^autoci_pkgdown\.yml$
+^tic\.R$
