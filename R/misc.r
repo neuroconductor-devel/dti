@@ -475,7 +475,7 @@ thcorr3D <- function(bw,lag=rep(5,3)){
 }
 
 andir2.image <- function(dtobject,slice=1,method=1,quant=0,minfa=NULL,show=TRUE,xind=NULL,yind=NULL,...){
-  if(!("dti" %in% class(dtobject))) stop("Not an dti-object")
+  if(!inherits(dtobject,"dti")) stop("Not an dti-object")
   if(is.null(dtobject$anindex)) stop("No anisotropy index yet")
   #adimpro <- require(adimpro)
   anindex <- dtobject$anindex

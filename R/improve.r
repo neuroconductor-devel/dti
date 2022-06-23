@@ -11,7 +11,7 @@ setMethod("dwiMtCombine",c("dwiMixtensor","dwiMixtensor"), function(mtobj1,mtobj
 #
   set.seed(1)
   args <- sys.call(-1)
-  if(class(mtobj1)!="dwiMixtensor"||class(mtobj2)!="dwiMixtensor"){
+  if(!inherits(mtobj1,"dwiMixtensor")|| !inherits(mtobj2,"dwiMixtensor")){
      warning("First two arguments need to specify dwiMixtensor objects \n returning
      NULL")
      return(invisible(NULL))
