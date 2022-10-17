@@ -1084,6 +1084,28 @@ setMethod("extract","dwiQball",function(x,
   invisible(z)
 })
 
+setmask <- function(object,  ...) cat("No method defined for class:",class(object),"\n")
+
+setGeneric("setmask", function(object,  ...) standardGeneric("getmask"))
+
+setMethod("setmask","dtiData",function(object, maskfile){
+  ddim <- object@ddim0
+  xind <- object@xind
+  yind <- object@yind
+  zind <- object@zind
+  mask <- oro.nifti::readNIfTI(maskfile, reorient = FALSE)
+  dmask <- mask@dim_
+  if(all(ddim == dmask)){
+    object@mask <- mask[xind,yind,zind] > 0
+  } else if(all(dmask == object@ddim)){
+    object@mask <- mask > 0
+  } else {
+    stop("Incorrect dimensions of mask file")
+  }
+  object
+}
+)
+
 getmask <- function(object,  ...) cat("No method defined for class:",class(object),"\n")
 
 setGeneric("getmask", function(object,  ...) standardGeneric("getmask"))
@@ -1110,6 +1132,7 @@ setMethod("getmask","dtiData",function(object, level=NULL, prop=.4, size=3){
   z
 }
 )
+
 setMethod("getmask","array",function(object, level=NULL, prop=.4, size=3){
   if(length(dim(object))!=3){
     level <- NULL
@@ -1144,7 +1167,7 @@ selectCube <- function(xind,yind,zind,ddim,maxobj){
   n1 <- length(xind)
   n2 <- length(yind)
   n3 <- length(zind)
-  if(any(c(xind[1],yind[1],zind[1]) < 1 || any(c(xind[n1]-ddim[1],yind[n2]-ddim[2],zind[n3]-ddim[3])>0))){
+  if(any(c(xind[1],yind[1],zind[1]) < 1) || any(c(xind[n1]-ddim[1],yind[n2]-ddim[2],zind[n3]-ddim[3])>0)){
     stop("Error in index specification, specified cube exceeds dimensions of object")
   }
   l1 <- (xind[n1]-xind[1]+1-n1) == 0
