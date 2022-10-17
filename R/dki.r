@@ -51,6 +51,8 @@ setMethod("dkiTensor", "dtiData",
 
             ## check for outliers and
             ## we need the mean s0 image and a mask
+            if(is.null(mask)) mask <- object@mask
+            # prefer mask from object over mask defined by level
             z <- sioutlier1(object@si,s0ind,object@level,mask,mc.cores=mc.cores)
             ## z$si and z$s0 only contain voxel in the mask
             ## first dimension of matrix z$si corresponds to gradients

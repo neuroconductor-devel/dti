@@ -19,6 +19,7 @@ setMethod("dwiQball","dtiData",function(object,what="wODF",order=4,lambda=0,mask
   s0ind <- object@s0ind
   ns0 <- length(s0ind)
   sdcoef <- object@sdcoef
+  if(is.null(mask)) mask <- object@mask
   z <- sioutlier(object@si,s0ind)
   si <- aperm(array(z$si,c(ngrad,ddim)),c(2:4,1))
   index <- z$index

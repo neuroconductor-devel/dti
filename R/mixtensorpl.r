@@ -16,6 +16,8 @@ setMethod("dwiMixtensor","dtiData",function(object, maxcomp=3,
   ## check model
   model <- match.arg(model)
   bvalue <- object@bvalue[-object@s0ind]
+  if(is.null(mask)) mask <- object@mask
+# prefer mask in dtiObject over fallback based on level
   if(model=="MT"&&sd(bvalue)>.1*median(bvalue)){
     cat("b-values indicate measurements on multiple shells,\n
          model 'MT' not yet implemented\n using model 'MTiso' instead\n")
@@ -127,9 +129,9 @@ setMethod("dwiMixtensor","dtiData",function(object, maxcomp=3,
                   s0=double(nvox),
                   mask=integer(nvox),
                   PACKAGE="dti")[c("s0","mask")]
-  z$mask <- as.logical(z$mask)
+  if(is.null(mask)) mask <- array(as.logical(z$mask),ddim[1:3])
+# fallback if no mask definition was provided
   s0 <- array(z$s0,ddim[1:3])
-  # mask <- array(z$mask,ddim[1:3])
   means0 <- max(s0[mask])
   #
   #  rescale s0 for numerical reasons

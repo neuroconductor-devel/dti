@@ -54,6 +54,8 @@ setMethod( "dtiTensor", "dtiData",
              ns0 <- length(s0ind)
              sdcoef <- object@sdcoef
              ngrad0 <- ngrad-ns0
+             if(is.null(mask)) mask <- object@mask
+# prefer mask from object over mask defined by level
              z <- sioutlier1(object@si,s0ind,object@level,mask,mc.cores=mc.cores)
              #
              #  this does not scale well with openMP
