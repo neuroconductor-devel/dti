@@ -81,7 +81,7 @@ setMethod("sdpar", "dtiData", function(object,
       adimpro::show.image(adimpro::make.image(img/maximg))
       title("Central slice: Intensity values")
       adimpro::show.image(adimpro::make.image((img<A0)))
-      title("Central slice: voxel not in mask")
+      title("Central slice: intensity below threshold")
       a <- readline(paste("Accept current cut off point",A0," (Y/N):"))
       if (toupper(a) == "N") {
         cutpoint <-  readline("Provide value for cut off point:")
@@ -129,7 +129,7 @@ setMethod("sdpar", "dtiData", function(object,
        sdcoef0 <- coefficients(lm(s0sd[ind]~s0mean[ind]))
        if(sdcoef0[1]<0){
           sdcoef0 <- numeric(2)
-          sdcoef0[1] <- .25  # this is an arbitrary (small) value to avaoid zero variances
+          sdcoef0[1] <- .25  # this is an arbitrary (small) value to avoid zero variances
           sdcoef0[2] <- coefficients(lm(s0sd[ind]~s0mean[ind]-1))
        }
        if(sdcoef0[2]<0){
@@ -1086,7 +1086,7 @@ setMethod("extract","dwiQball",function(x,
 
 setmask <- function(object,  ...) cat("No method defined for class:",class(object),"\n")
 
-setGeneric("setmask", function(object,  ...) standardGeneric("getmask"))
+setGeneric("setmask", function(object,  ...) standardGeneric("setmask"))
 
 setMethod("setmask","dtiData",function(object, maskfile){
   ddim <- object@ddim0
