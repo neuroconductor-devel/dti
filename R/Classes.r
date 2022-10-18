@@ -1,9 +1,11 @@
+setClassUnion("ArrayOrNULL", c("array", "NULL"))
 setClass("dwi",
          representation(.Data = "list",
                         call = "list",
                         gradient = "matrix",
                         bvalue = "numeric",
-                        btb    = "matrix",
+                        btb    = "matrix",                        
+                        mask   = "ArrayOrNULL",
                         ngrad  = "integer", # = dim(btb)[2] = dim(gradient)[2]
                         s0ind  = "integer", # indices of s0 images
                         replind = "integer", # replications in gradient design
@@ -17,6 +19,18 @@ setClass("dwi",
                         orientation = "integer",
                         rotation = "matrix",
                         source = "character"),
+         validity=function(object){
+           if (!is.null(object@mask)&&any(dim(object@mask)!=object@ddim)) {
+             cat("dimension of mask:",dim(object@mask),"\n")
+             cat("should be:",object@ddim,"\n")
+             cat("invalid dimension of array mask\n")
+             return(invisible(FALSE))
+           }
+           if (!is.null(object@mask)&&!is.logical(object@mask)) {
+             cat("invalid type of array mask, should be logical\n")
+             return(invisible(FALSE))
+           }
+      }
 )
 
 dwi <- function(object,  ...) cat("This object has class",class(object),"\n")
@@ -69,7 +83,7 @@ setClass("dtiTensor",
                         sigma  = "array",
                         scorr  = "array",
                         bw     = "numeric",
-                        mask   = "array",
+#                        mask   = "array",
                         hmax   = "numeric",
                         outlier = "numeric",
                         scale  = "numeric"),
@@ -87,16 +101,16 @@ setClass("dtiTensor",
              cat("invalid dimension of array sigma\n")
              return(invisible(FALSE))
            }
-           if (any(dim(object@mask)!=object@ddim)) {
-             cat("dimension of mask:",dim(object@mask),"\n")
-             cat("should be:",object@ddim,"\n")
-             cat("invalid dimension of array mask\n")
-             return(invisible(FALSE))
-           }
-           if (!is.logical(object@mask)) {
-             cat("invalid type of array mask, should be logical\n")
-             return(invisible(FALSE))
-           }
+           # if (any(dim(object@mask)!=object@ddim)) {
+           #   cat("dimension of mask:",dim(object@mask),"\n")
+           #   cat("should be:",object@ddim,"\n")
+           #   cat("invalid dimension of array mask\n")
+           #   return(invisible(FALSE))
+           # }
+           # if (!is.logical(object@mask)) {
+           #   cat("invalid type of array mask, should be logical\n")
+           #   return(invisible(FALSE))
+           # }
            if (length(dim(object@scorr))!=3) {
              cat("invalid dimension of scorr\n")
              return(invisible(FALSE))
@@ -156,7 +170,7 @@ setClass("dwiQball",
                         sigma  = "array",
                         scorr  = "array",
                         bw     = "numeric",
-                        mask   = "array",
+#                        mask   = "array",
                         hmax   = "numeric",
                         outlier = "numeric",
                         scale  = "numeric"),
@@ -180,16 +194,16 @@ setClass("dwiQball",
              cat("invalid regularization parameter \n")
              return(invisible(FALSE))
            }
-           if (any(dim(object@mask)!=object@ddim)) {
-             cat("dimension of mask:",dim(object@mask),"\n")
-             cat("should be:",object@ddim,"\n")
-             cat("invalid dimension of array mask\n")
-             return(invisible(FALSE))
-           }
-           if (!is.logical(object@mask)) {
-             cat("invalid type of array mask, should be logical\n")
-             return(invisible(FALSE))
-           }
+           # if (any(dim(object@mask)!=object@ddim)) {
+           #   cat("dimension of mask:",dim(object@mask),"\n")
+           #   cat("should be:",object@ddim,"\n")
+           #   cat("invalid dimension of array mask\n")
+           #   return(invisible(FALSE))
+           # }
+           # if (!is.logical(object@mask)) {
+           #   cat("invalid type of array mask, should be logical\n")
+           #   return(invisible(FALSE))
+           # }
            if (length(dim(object@scorr))!=3) {
              cat("invalid dimension of scorr\n")
              return(invisible(FALSE))
@@ -232,7 +246,7 @@ setClass("dwiMixtensor",
                         sigma  = "array",
                         scorr  = "array",
                         bw     = "numeric",
-                        mask   = "array",
+#                        mask   = "array",
                         hmax   = "numeric",
                         outlier = "numeric",
                         scale  = "numeric"),
@@ -267,16 +281,16 @@ setClass("dwiMixtensor",
              cat("invalid dimension of array th0\n")
              return(invisible(FALSE))
            }
-           if (any(dim(object@mask)!=object@ddim)) {
-             cat("dimension of mask:",dim(object@mask),"\n")
-             cat("should be:",object@ddim,"\n")
-             cat("invalid dimension of array mask\n")
-             return(invisible(FALSE))
-           }
-           if (!is.logical(object@mask)) {
-             cat("invalid type of array mask, should be logical\n")
-             return(invisible(FALSE))
-           }
+           # if (any(dim(object@mask)!=object@ddim)) {
+           #   cat("dimension of mask:",dim(object@mask),"\n")
+           #   cat("should be:",object@ddim,"\n")
+           #   cat("invalid dimension of array mask\n")
+           #   return(invisible(FALSE))
+           # }
+           # if (!is.logical(object@mask)) {
+           #   cat("invalid type of array mask, should be logical\n")
+           #   return(invisible(FALSE))
+           # }
            if (length(dim(object@scorr))!=3) {
              cat("invalid dimension of scorr\n")
              return(invisible(FALSE))
@@ -296,7 +310,7 @@ setClass("dkiTensor",
                         sigma  = "array",
                         scorr  = "array",
                         bw     = "numeric",
-                        mask   = "array",
+#                        mask   = "array",
                         hmax   = "numeric",
                         outlier = "numeric",
                         scale  = "numeric"),

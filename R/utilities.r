@@ -1089,12 +1089,12 @@ setmask <- function(object,  ...) cat("No method defined for class:",class(objec
 setGeneric("setmask", function(object,  ...) standardGeneric("setmask"))
 
 setMethod("setmask","dtiData",function(object, maskfile){
-  ddim <- object@ddim0
+  ddim <- object@ddim0[1:3]
   xind <- object@xind
   yind <- object@yind
   zind <- object@zind
   mask <- oro.nifti::readNIfTI(maskfile, reorient = FALSE)
-  dmask <- mask@dim_
+  dmask <- dim(mask)
   if(all(ddim == dmask)){
     object@mask <- mask[xind,yind,zind] > 0
   } else if(all(dmask == object@ddim)){
