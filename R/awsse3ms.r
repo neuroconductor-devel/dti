@@ -35,6 +35,7 @@ setMethod("dwi.smooth.ms",
             ngrad <- ngrad - ns0
             grad <- object@gradient[,-s0ind]
             bvalues <- object@bvalue[-s0ind]
+            if(is.null(mask)) mask <- object@mask
             sdcoef <- object@sdcoef
             level <- object@level
             vext <- object@voxelext[2:3]/object@voxelext[1]

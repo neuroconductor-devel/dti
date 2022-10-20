@@ -77,12 +77,14 @@ sioutlier1 <- function( si, s0ind, level, mask, mc.cores = 1, verbose = TRUE){
   if(ns0>1) {
     s0 <- rep(1/ns0,ns0)%*%s0
   }
-  if(is.null(mask)) mask <- array(s0 > level,dsi[-length(dsi)])
-  mask <- connect.mask(mask)
+  if(is.null(mask)){
+    mask <- array(s0 > level,dsi[-length(dsi)])
+    mask <- connect.mask(mask)
+  }
   nvox <- sum(mask)
 
   t2 <- Sys.time()
-  if (verbose) cat( difftime( t2, t1), attr(difftime( t2, t1), "units"), "for", n, "voxel\n")
+  if (verbose) cat( difftime( t2, t1), attr(difftime( t2, t1), "units"), "for", nvox, "voxel\n")
   if(mc.cores>1) setCores(mc.cores.old,reprt=FALSE)
   list(si=zz[,mask],s0=s0[mask],index=index,mask=mask)
 }
