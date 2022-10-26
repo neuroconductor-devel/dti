@@ -311,7 +311,7 @@ AdjacencyMatrix <- function(fiberobj, atlas, labels=NULL,
       amat[nlevel,nlevel] <- nfibers1
       if(verbose) cat("region",nlevel,"count",nfibers1,"\n")
     }
-   if(method=="standardize") amat <-
+   if(method[1]=="standardize") amat <-
          standardizeAdjmatrix(amat, diagelements, symmetric)
    amat
  }
