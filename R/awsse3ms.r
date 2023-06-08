@@ -93,7 +93,7 @@ setMethod("dwi.smooth.ms",
             object@bvalue <- bvalue <- c(0,object@bvalue[-object@s0ind])
             object@btb <- sweep(create.designmatrix.dti(grad), 2, bvalue, "*")
             object@s0ind <- as.integer(1)
-            object@replind <- as.integer(1:ngrad)
+            object@replind <- replind(grad)
             object@ngrad <- as.integer(ngrad)
             object@call <- args
             attr(object,"ns0") <- ns0

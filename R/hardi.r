@@ -14,6 +14,7 @@ setMethod("dwiQball","dtiData",function(object,what="wODF",order=4,lambda=0,mask
   if (!(what %in% c("ODF","wODF","aODF","ADC"))) {
     stop("what should specify either ODF, wODF, aODF, or ADC\n")
   }
+  if(!is.null(attributes(object)$ns0)) object <- expanddwiobj(object)
   ngrad <- object@ngrad
   ddim <- object@ddim
   s0ind <- object@s0ind

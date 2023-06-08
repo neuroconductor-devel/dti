@@ -34,6 +34,7 @@ setMethod("dkiTensor", "dtiData",
             mc.cores <- min(mc.cores, detectCores())
 
             ## define the design matrix of the estimation problem
+            if(!is.null(attributes(object)$ns0)) object <- expanddwiobj(object)
             s0ind <- object@s0ind
             xxx <- dkiDesign(object@gradient[, - s0ind])
 

@@ -15,6 +15,7 @@ setMethod("dwiMixtensor","dtiData",function(object, maxcomp=3,
 
   ## check model
   model <- match.arg(model)
+  if(!is.null(attributes(object)$ns0)) object <- expanddwiobj(object)
   bvalue <- object@bvalue[-object@s0ind]
   if(is.null(mask)) mask <- object@mask
 # prefer mask in dtiObject over fallback based on level

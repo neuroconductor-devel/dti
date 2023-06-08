@@ -45,6 +45,7 @@ setMethod( "dtiTensor", "dtiData",
              mc.cores <- min(mc.cores,detectCores())
              args <- sys.call(-1)
              args <- c(object@call,args)
+             if(!is.null(attributes(object)$ns0)) object <- expanddwiobj(object)
              ngrad <- object@ngrad
              grad <- object@gradient
              btb <- object@btb
