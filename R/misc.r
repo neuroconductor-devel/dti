@@ -659,8 +659,8 @@ expanddwiobj <- function(object){
      grad <- cbind(matrix(0,3,ns0),object@gradient[,-1])
      bvalue <- c(rep(0,ns0-1),object@bvalue)
      ngrad <- object@ngrad+ns0-1
-     s0 <- object@si[,,,dwobj@s0ind[1]]
-     si <- object@si[,,,-dwobj@s0ind]
+     s0 <- object@si[,,,object@s0ind[1]]
+     si <- object@si[,,,-object@s0ind]
      sinew <- array(0,c(dim(s0),ngrad))
      sinew[,,,-(1:ns0)] <- si
      sinew[,,,1:ns0] <- s0
