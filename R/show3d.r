@@ -61,7 +61,7 @@ setMethod("show3d","dtiData", function( obj, xind=NULL, yind=NULL, zind=NULL,
   if(!add) {
     rgl::open3d()
     rgl::par3d(...)
-    rgl::rgl.bg(color=bgcolor)
+    rgl::bg3d(color=bgcolor)
   }
   show3dData(radii,gradient,centers=tmean,minalpha=minalpha,...)
   if(box) rgl::bbox3d()
@@ -70,9 +70,9 @@ setMethod("show3d","dtiData", function( obj, xind=NULL, yind=NULL, zind=NULL,
   } else {
     if(title) rgl::title3d(switch(what,"data"="observed DWI data","adc"="observed ADC"),color="white",cex=1.5)
   }
-  cat("\n rgl-device",rgl::rgl.cur(),switch(what,"data"="observed diffusion weighted data","adc"="apparent diffusion coefficients from data"),"\n",
+  cat("\n rgl-device",rgl::cur3d(),switch(what,"data"="observed diffusion weighted data","adc"="apparent diffusion coefficients from data"),"\n",
       if(normalize) "normalized","\n")
-  invisible(rgl::rgl.cur())
+  invisible(rgl::cur3d())
 })
 ##############
 
@@ -182,7 +182,7 @@ setMethod("show3d","dtiTensor", function(obj,
   if(!add) {
     rgl::open3d()
     rgl::par3d(...)
-    rgl::rgl.bg(color=bgcolor)
+    rgl::bg3d(color=bgcolor)
   }
   if(what=="odf"){
     show3dODF(radii,polyeder,centers=tmean,minalpha=minalpha,...)
@@ -194,7 +194,7 @@ setMethod("show3d","dtiTensor", function(obj,
     dd <- tracks@fibers
     startind <- tracks@startind
     dd <- expandFibers(dd,startind)$fibers
-    rgl::rgl.lines(dd[,1]+vext[1]/2,dd[,2]+vext[2]/2,dd[,3]+vext[3]/2,
+    rgl::segments3d(dd[,1]+vext[1]/2,dd[,2]+vext[2]/2,dd[,3]+vext[3]/2,
               color=rgb(abs(dd[,4]),abs(dd[,5]),abs(dd[,6])),
               size=3)
   }
@@ -204,9 +204,9 @@ setMethod("show3d","dtiTensor", function(obj,
   } else {
     if(title) rgl::title3d(switch(what,"tensor"="estimated tensors","adc"="estimated ADC (tensor)"),color="white",cex=1.5)
   }
-  cat("\n rgl-device",rgl::rgl.cur(),switch(what,"tensor"="estimated tensors","adc"="apparent diffusion coefficients from estimated tensors"),"\n",
+  cat("\n rgl-device",rgl::cur3d(),switch(what,"tensor"="estimated tensors","adc"="apparent diffusion coefficients from estimated tensors"),"\n",
       if(obj@hmax>1) paste("smoothed with hmax=",obj@hmax),if(normalize) "normalized","\n")
-  invisible(rgl::rgl.cur())
+  invisible(rgl::cur3d())
 })
 setMethod("show3d","dwiMixtensor", function(obj,
                                             xind=NULL, yind=NULL, zind=NULL, minfa=.3, minorder=1, mineo=1, fibers=FALSE,
@@ -327,16 +327,16 @@ setMethod("show3d","dwiMixtensor", function(obj,
   if(!add) {
     rgl::open3d()
     rgl::par3d(...)
-    rgl::rgl.bg(color=bgcolor)
+    rgl::bg3d(color=bgcolor)
   }
   if(what %in% c("odf","both")) show3dODF(radii,polyeder,centers=tmean,minalpha=minalpha,...)
-  if(what %in% c("axis","both"))  rgl::rgl.lines(lcoord[1,],lcoord[2,],lcoord[3,],color=colorvalues,lwd=lwd)
+  if(what %in% c("axis","both"))  rgl::segments3d(lcoord[1,],lcoord[2,],lcoord[3,],color=colorvalues,lwd=lwd)
   if(fibers){
     tracks <- tracking(obj,mask=mask,minfa=minfa,maxangle=maxangle)
     dd <- tracks@fibers
     startind <- tracks@startind
     dd <- expandFibers(dd,startind)$fibers
-    rgl::rgl.lines(dd[,1]+vext[1]/2,dd[,2]+vext[2]/2,dd[,3]+vext[3]/2,
+    rgl::segments3d(dd[,1]+vext[1]/2,dd[,2]+vext[2]/2,dd[,3]+vext[3]/2,
               color=rgb(abs(dd[,4]),abs(dd[,5]),abs(dd[,6])),
               lwd=lwd)
   }
@@ -346,9 +346,9 @@ setMethod("show3d","dwiMixtensor", function(obj,
   } else {
     if(title) rgl::title3d(switch(what,"odf"="estimated ODF"),color="white",cex=1.5)
   }
-  cat("\n rgl-device",rgl::rgl.cur(),switch(what,"odf"="estimated ODF"),"\n")
+  cat("\n rgl-device",rgl::cur3d(),switch(what,"odf"="estimated ODF"),"\n")
   if(obj@hmax>1) paste("smoothed with hmax=",obj@hmax,"\n")
-  invisible(rgl::rgl.cur())
+  invisible(rgl::cur3d())
 })
 ##############
 
@@ -403,18 +403,18 @@ setMethod("show3d","dtiIndices", function(obj,
   if(!add) {
     rgl::open3d()
     rgl::par3d(...)
-    rgl::rgl.bg(color=bgcolor)
+    rgl::bg3d(color=bgcolor)
   }
-  rgl::rgl.lines(lcoord[1,],lcoord[2,],lcoord[3,],color=colorvalues,lwd=lwd)
+  rgl::segments3d(lcoord[1,],lcoord[2,],lcoord[3,],color=colorvalues,lwd=lwd)
   if(box) rgl::bbox3d()
   if(is.character(title)) {
     rgl::title3d(title,color="white",cex=1.5)
   } else {
     if(title) rgl::title3d("Main directions",color="white",cex=1.5)
   }
-  cat("\n rgl-device",rgl::rgl.cur(),"Main directions of diffusion estimated from the tensor model\n\n")
+  cat("\n rgl-device",rgl::cur3d(),"Main directions of diffusion estimated from the tensor model\n\n")
   if(box) rgl::bbox3d()
-  invisible(rgl::rgl.cur())
+  invisible(rgl::cur3d())
 })
 
 ##############
@@ -495,7 +495,7 @@ setMethod("show3d","dwiQball", function(obj,
   if(!add) {
     rgl::open3d()
     rgl::par3d(...)
-    rgl::rgl.bg(color=bgcolor)
+    rgl::bg3d(color=bgcolor)
   }
   show3dODF(radii,polyeder,centers=tmean,minalpha=minalpha,...)
   if(box) rgl::bbox3d()
@@ -504,8 +504,8 @@ setMethod("show3d","dwiQball", function(obj,
   } else {
     if(title) rgl::title3d(switch(obj@what,"ODF"="ODF","wODF"="Weighted ODF","aODF"="alternative ODF","adc"="ADC (Sph. Harmonics)"),color="white",cex=1.5)
   }
-  cat("\n rgl-device",rgl::rgl.cur(),switch(tolower(obj@what),"odf"="Estimated orientation density function (Qball)","aodf"="Estimated orientation density function (Qball)","adc"="estimated apparent diffusion coefficients (sperical harmonics","wodf"="Estimated orientation density function (Aganji et.al. 2009)"),"\n")
-  invisible(rgl::rgl.cur())
+  cat("\n rgl-device",rgl::cur3d(),switch(tolower(obj@what),"odf"="Estimated orientation density function (Qball)","aodf"="Estimated orientation density function (Qball)","adc"="estimated apparent diffusion coefficients (sperical harmonics","wodf"="Estimated orientation density function (Aganji et.al. 2009)"),"\n")
+  invisible(rgl::cur3d())
 })
 
 setMethod("show3d","dwiFiber", function(obj,
@@ -514,12 +514,12 @@ setMethod("show3d","dwiFiber", function(obj,
   if(!add) {
     rgl::open3d()
     rgl::par3d(...)
-    rgl::rgl.bg(color=bgcolor)
+    rgl::bg3d(color=bgcolor)
   }
   dd <- obj@fibers
   startind <- obj@startind
   dd <- expandFibers(dd,startind,delta)$fibers
-  rgl::rgl.lines(dd[,1],dd[,2],dd[,3],
+  rgl::segments3d(dd[,1],dd[,2],dd[,3],
             color=rgb(abs(dd[,4]),abs(dd[,5]),abs(dd[,6])),
             lwd=lwd)
   if(box) rgl::bbox3d()
@@ -529,7 +529,7 @@ setMethod("show3d","dwiFiber", function(obj,
     if(title) rgl::title3d("Fiber tracks",color="white",cex=1.5)
   }
 
-  invisible(rgl::rgl.cur())
+  invisible(rgl::cur3d())
 })
 
 ## argument which are not yet decided have "???"
@@ -649,11 +649,11 @@ setMethod( "show3d", "dkiTensor", function( obj,
   if ( !add) {
     rgl::open3d()
     rgl::par3d( ...)
-    rgl::rgl.bg( color = bgcolor)
+    rgl::bg3d( color = bgcolor)
   }
   show3dTens( radii, polyeder, centers = tmean, colors = colorvalues, alpha = minalpha + ( 1 - minalpha) * fa, ...)
 
-  invisible(rgl::rgl.cur())
+  invisible(rgl::cur3d())
 })
 
 
@@ -703,7 +703,7 @@ show3dTens <- function(radii, polyeder, centers=NULL, colors=NULL, alpha=1, ...)
   vertices <- sweep(vertices,c(1,3),centers,"+")
   dim(vertices) <- c(3,nv*n)
   indices <- sweep(matrix(indices,ni,n),2,((1:n)-1)*nv,"+")
-  rgl::rgl.triangles(vertices[1,indices],vertices[2,indices],vertices[3,indices],
+  rgl::triangles3d(vertices[1,indices],vertices[2,indices],vertices[3,indices],
                 color=colors,alpha=alpha,...)
 }
 
@@ -743,16 +743,16 @@ show3dData <- function( radii, vertices, centers=NULL, minalpha=1, ...){
   vertices <- sweep(vertices0,c(1,3),centers,"+")
   lines[2,,,] <- aperm(vertices,c(1,3,2))
   colors <- array(colors,c(nv,n))
-  #   rgl::rgl.lines(lines[,1,,],lines[,2,,],lines[,3,,],color=t(colors)[ind1],lwd=1)
-  rgl::rgl.lines(lines[,1,,],lines[,2,,],lines[,3,,],lwd=1)
-  rgl::rgl.points(vertices[1,,],vertices[2,,],vertices[3,,],color=colors,size=4)
+  #   rgl::segments3d(lines[,1,,],lines[,2,,],lines[,3,,],color=t(colors)[ind1],lwd=1)
+  rgl::segments3d(lines[,1,,],lines[,2,,],lines[,3,,],lwd=1)
+  rgl::points3d(vertices[1,,],vertices[2,,],vertices[3,,],color=colors,size=4)
   vertices <- sweep(-.9*vertices0,c(1,3),centers,"+")
   lines[1,,,] <- aperm(vertices,c(1,3,2))
   vertices <- sweep(-vertices0,c(1,3),centers,"+")
   lines[2,,,] <- aperm(vertices,c(1,3,2))
-  #   rgl::rgl.lines(lines[,1,,],lines[,2,,],lines[,3,,],color=t(colors)[ind1],lwd=1)
-  rgl::rgl.lines(lines[,1,,],lines[,2,,],lines[,3,,],lwd=1)
-  rgl::rgl.points(vertices[1,,],vertices[2,,],vertices[3,,],color=colors,size=4)
+  #   rgl::segments3d(lines[,1,,],lines[,2,,],lines[,3,,],color=t(colors)[ind1],lwd=1)
+  rgl::segments3d(lines[,1,,],lines[,2,,],lines[,3,,],lwd=1)
+  rgl::points3d(vertices[1,,],vertices[2,,],vertices[3,,],color=colors,size=4)
 }
 
 #############
@@ -781,7 +781,7 @@ show3dCdata <- function( radii, polyeder, centers=NULL, minalpha=1, scale=.5, ..
   vertices <- sweep(scale*vertices,c(1,3),centers,"+")
   dim(vertices) <- c(3,nv*n)
   indices <- sweep(matrix(indices,ni,n),2,((1:n)-1)*nv,"+")
-  rgl::rgl.triangles(vertices[1,indices],vertices[2,indices],vertices[3,indices],
+  rgl::triangles3d(vertices[1,indices],vertices[2,indices],vertices[3,indices],
                 color=colors[indices],alpha=alpha[indices],...)
 }
 
@@ -814,6 +814,6 @@ show3dODF <- function( radii, polyeder, centers=NULL, minalpha=1, ...){
   vertices <- sweep(vertices,c(1,3),centers,"+")
   dim(vertices) <- c(3,nv*n)
   indices <- sweep(matrix(indices,ni,n),2,((1:n)-1)*nv,"+")
-  rgl::rgl.triangles(vertices[1,indices],vertices[2,indices],vertices[3,indices],
+  rgl::triangles3d(vertices[1,indices],vertices[2,indices],vertices[3,indices],
                 color=colors[ind][indices],alpha=alpha[indices],...)
 }
