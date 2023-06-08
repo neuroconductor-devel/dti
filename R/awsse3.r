@@ -87,6 +87,7 @@ setMethod("dwi.smooth", "dtiData", function(object,kstar,lambda=20,kappa0=NULL,m
   object@replind <- as.integer(1:ngrad)
   object@ngrad <- as.integer(ngrad)
   object@call <- args
+  attr(object,"ns0") <- ns0
   object
 }
 )
