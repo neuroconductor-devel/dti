@@ -1,8 +1,25 @@
 citHeader("To cite dti in publications use:")
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Book",
+  title        = " Magnetic Resonance Brain Imaging
+                   Modelling and Data Analysis Using R",
+  author       = c(as.person("J\\\"org Polzehl"),
+                   as.person("Karsten Tabelow")),
+  year         = "2023",
+  publisher    = "Springer Cham",
+  doi          = "10.1007/978-3-030-29184-6_5",
+
+
+  textVersion  =
+  paste("Joerg Polzehl, Karsten Tabelow (2023).",
+        "Magnetic Resonance Brain Imaging
+                   Modelling and Data Analysis Using R",
+        "Springer Cham", "DOI https://doi.org/10.1007/978-3-030-29184-6_5")
+)
+
+bibentry(bibtype = "Article",
   title        = "Beyond the Gaussian Model in Diffusion-Weighted Imaging: The Package {dti}",
-  author       = personList(as.person("Karsten Tabelow"),
+  author       = c(as.person("Karsten Tabelow"),
                    as.person("J\\\"org Polzehl")),
   journal      = "Journal of Statistical Software",
   year         = "2011",
@@ -18,9 +35,9 @@ citEntry(entry = "Article",
         "URL https://www.jstatsoft.org/v44/i12/.")
 )
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
          title = "Diffusion Tensor Imaging: Structural Adaptive Smoothing",
-         author = personList(as.person("Karsten Tabelow"), 
+         author = c(as.person("Karsten Tabelow"), 
 	                     as.person("J\\\"org Polzehl"),
 	                     as.person("Vladimir Spokoiny"),
                              as.person("Henning U. Voss")),
@@ -39,9 +56,9 @@ citEntry(entry = "Article",
 	 header = "For the structural adaptive smoothing methods please cite:"
 )
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
          title = "Adaptive smoothing of multi-shell diffusion-weighted magnetic resonance data by msPOAS",
-         author = personList(as.person("Saskia M.A. Becker"),
+         author = c(as.person("Saskia M.A. Becker"),
                              as.person("Karsten Tabelow"),
                              as.person("Siawoosh Mohammadi"),
                              as.person("Nikolaus Weiskopf"),
@@ -60,9 +77,9 @@ citEntry(entry = "Article",
          header = "For the msPOAS method please cite:"
 )
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
          title = "Modeling the orientation distribution function by mixtures of angular central Gaussian distributions",
-         author = personList(as.person("Karsten Tabelow"), 
+         author = c(as.person("Karsten Tabelow"), 
 	                     as.person("Henning U. Voss"),
                              as.person("J\\\"org Polzehl")),
          journal      = "Journal of Neuroscience Methods",
