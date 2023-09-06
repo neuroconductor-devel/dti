@@ -48,7 +48,7 @@ Modeling and Data Analysis Using R. Springer, Use R! series. Doi:10.1007/978-3-0
               \emph{Diffusion Tensor Imaging: Structural adaptive smoothing},
               NeuroImage 39(4), 1763-1773 (2008).
 
-             \url{ http://www.wias-berlin.de/projects/matheon_a3/}
+             \url{ https://www.wias-berlin.de/projects/matheon_a3/}
 }
 \author{
   Karsten Tabelow \email{tabelow@wias-berlin.de}\cr

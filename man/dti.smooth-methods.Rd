@@ -65,7 +65,7 @@
               NeuroImage 39(4), 1763-1773 (2008).
 
 
-              \url{ http://www.wias-berlin.de/projects/matheon_a3/} 
+              \url{ https://www.wias-berlin.de/projects/matheon_a3/} 
 }
 \author{ 
   Karsten Tabelow \email{tabelow@wias-berlin.de}\cr 

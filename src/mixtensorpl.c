@@ -68,7 +68,7 @@ typedef struct{
 
 /* C++ code
 public static T[] SubArrayDeepClone<T>(this T[] data, int index, int length){
-  // ggf. fuer schoenes array kopieren (http://stackoverflow.com/questions/943635/c-arrays-getting-a-sub-array-from-an-existing-array)
+  // ggf. fuer schoenes array kopieren (https://stackoverflow.com/questions/943635/c-arrays-getting-a-sub-array-from-an-existing-array)
     T[] arrCopy = new T[length];
     Array.Copy(data, index, arrCopy, 0, length);
     using (MemoryStream ms = new MemoryStream())

@@ -26,7 +26,7 @@
               \emph{ Medical Image Navigation and Research Tool by INRIA (MedINRIA)}, 
               INRIA Sophia Antipolis - Research Project ASCLEPIOS 2007
 
-              \url{http://www-sop.inria.fr/asclepios/software/MedINRIA/}
+              \url{https://www-sop.inria.fr/asclepios/software/MedINRIA/}
 }
 \author{ 
   Karsten Tabelow \email{tabelow@wias-berlin.de}\cr 

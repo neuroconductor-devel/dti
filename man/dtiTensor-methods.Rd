@@ -71,7 +71,7 @@
               J. Polzehl, K. Tabelow (2019). Magnetic Resonance Brain Imaging:
               Modeling and Data Analysis Using R. Springer, Use R! series. Doi:10.1007/978-3-030-29184-6.
 
-              \url{ http://www.wias-berlin.de/projects/matheon_a3/}
+              \url{ https://www.wias-berlin.de/projects/matheon_a3/}
 }
 \author{
   Karsten Tabelow \email{tabelow@wias-berlin.de}\cr
