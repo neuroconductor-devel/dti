@@ -102,7 +102,7 @@
 }
 \value{
   For function \code{extract} a list with components carrying the names of the options specified in
-  argument \code{what}.  For code{"["} the cutted object.
+  argument \code{what}.  For \code{"["} the cutted object.
 }
 \author{
   Karsten Tabelow \email{tabelow@wias-berlin.de}\cr
