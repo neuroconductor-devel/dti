@@ -36,7 +36,7 @@ extern "C"{
 	
 		delete tester;
 			
-		PROTECT(retVec = allocVector(REALSXP, length));
+		PROTECT(retVec = Rf_allocVector(REALSXP, length));
 		++nProtected;
 		
 		for (ii = 0; ii < length; ++ii)
@@ -101,7 +101,7 @@ extern "C"{
 			
 //		Rprintf("delete tracks ausgefuehrt\n");
 
-		PROTECT(retVec = allocVector(REALSXP, length));
+		PROTECT(retVec = Rf_allocVector(REALSXP, length));
 		++nProtected;
 
 //		Rprintf("Protect ausgefuehrt\n");
