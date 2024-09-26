@@ -104,7 +104,7 @@ double rskmixb2(int param_length, double *param, void* ex){
 
   double result = 0;
 
-  double* si = Calloc(ngradcc,double);
+  double* si = calloc(ngradcc, sizeof(double));
   int i;
   for(i=0;i<ngradcc;i++){
     si[i] = si_init[i+iibv*ngradcc];
@@ -117,7 +117,7 @@ double rskmixb2(int param_length, double *param, void* ex){
 //    return 0;
 //  }
 
-  Free(si);
+  free(si);
 
   return result;
 }
@@ -126,7 +126,7 @@ double rskmixb1(int param_length, double *param, void* ex){
 
   double result = 0;
 
-  double* si = Calloc(ngradcc,double);
+  double* si = calloc(ngradcc, sizeof(double));
   int i;
   for(i=0;i<ngradcc;i++){
     si[i] = si_init[i+iibv*ngradcc];
@@ -139,7 +139,7 @@ double rskmixb1(int param_length, double *param, void* ex){
 //    return 0;
 //  }
 
-  Free(si);
+  free(si);
 
   return result;
 }
@@ -148,7 +148,7 @@ double rskmixb0(int param_length, double *param, void* ex){
 
   double result = 0;
 
-  double* si = Calloc(ngradcc,double);
+  double* si = calloc(ngradcc, sizeof(double));
   int i;
   for(i=0;i<ngradcc;i++){
     si[i] = si_init[i+iibv*ngradcc];
@@ -161,7 +161,7 @@ double rskmixb0(int param_length, double *param, void* ex){
 //    return 0;
 //  }
 
-  Free(si);
+  free(si);
 
   return result;
 }
@@ -169,40 +169,40 @@ double rskmixb0(int param_length, double *param, void* ex){
 void drskmb2(int param_length, double* param, double* result, void* ex){
 
   int i;
-  double* si = Calloc(ngradcc, double);
+  double* si = calloc(ngradcc, sizeof(double));
   for(i=0;i<ngradcc;i++){
    si[i] = si_init[i+iibv*ngradcc];
   }
 
   F77_CALL(drskmb2)(param, &param_length, si, gradients, bv, &ngradcc, result);
 
-  Free(si);
+  free(si);
 }
 
 void drskmb1(int param_length, double* param, double* result, void* ex){
 
   int i;
-  double* si = Calloc(ngradcc, double);
+  double* si = calloc(ngradcc, sizeof(double));
   for(i=0;i<ngradcc;i++){
    si[i] = si_init[i+iibv*ngradcc];
   }
 
   F77_CALL(drskmb1)(param, &param_length, si, gradients, bv, &ngradcc, &alpha, result);
 
-  Free(si);
+  free(si);
 }
 
 void drskmb0(int param_length, double* param, double* result, void* ex){
 
   int i;
-  double* si = Calloc(ngradcc, double);
+  double* si = calloc(ngradcc, sizeof(double));
   for(i=0;i<ngradcc;i++){
    si[i] = si_init[i+iibv*ngradcc];
   }
 
   F77_CALL(drskmb0)(param, &param_length, si, gradients, bv, &ngradcc, &lambda, &alpha, result);
 
-  Free(si);
+  free(si);
 }
 
 mfunrskmb2_ret getparam2b(int param_length, double* param, double fmin){
@@ -213,9 +213,9 @@ mfunrskmb2_ret getparam2b(int param_length, double* param, double fmin){
   int c_ord = (param_length-3)/3;
 
   double  w0, lambda, alpha;
-  double* w_tmp = Calloc(param_length, double);
-  double* param_work = Calloc(param_length, double);
-  int* o = Calloc(c_ord, int);
+  double* w_tmp = calloc(param_length, sizeof(double));
+  double* param_work = calloc(param_length, sizeof(double));
+  int* o = calloc(c_ord, sizeof(int));
 
    for( i = 0; i < param_length; i++){
       param_work[i] = param[i];
@@ -268,9 +268,9 @@ mfunrskmb2_ret getparam2b(int param_length, double* param, double fmin){
 //  Rprintf("getparam2: npar %i, fmin= %f ", param_length, fmin);
 //  Rprintf("\n");
 
-  Free(o);
-  Free(param_work);
-  Free(w_tmp);
+  free(o);
+  free(param_work);
+  free(w_tmp);
 
   return ret_val;
 }
@@ -282,9 +282,9 @@ mfunrskmb1_ret getparam1b(int param_length, double* param, double fmin){
 
   int c_ord = (param_length-2)/3;
 
-  double* w_tmp = Calloc(param_length, double);
-  double* param_work = Calloc(param_length, double);
-  int* o = Calloc(c_ord, int);
+  double* w_tmp = calloc(param_length, sizeof(double));
+  double* param_work = calloc(param_length, sizeof(double));
+  int* o = calloc(c_ord, sizeof(int));
 
    for( i = 0; i < param_length; i++){
       param_work[i] = param[i];
@@ -331,9 +331,9 @@ mfunrskmb1_ret getparam1b(int param_length, double* param, double fmin){
   ret_val.orient = orient;
   ret_val.value = fmin;
 
-  Free(o);
-  Free(param_work);
-  Free(w_tmp);
+  free(o);
+  free(param_work);
+  free(w_tmp);
 
   return ret_val;
 }
@@ -345,9 +345,9 @@ mfunrskmb0_ret getparam0b(int param_length, double* param, double fmin){
 
   int c_ord = (param_length-1)/3;
 
-  double* w_tmp = Calloc(param_length, double);
-  double* param_work = Calloc(param_length, double);
-  int* o = Calloc(c_ord, int);
+  double* w_tmp = calloc(param_length, sizeof(double));
+  double* param_work = calloc(param_length, sizeof(double));
+  int* o = calloc(c_ord, sizeof(int));
 
    for( i = 0; i < param_length; i++){
       param_work[i] = param[i];
@@ -392,9 +392,9 @@ mfunrskmb0_ret getparam0b(int param_length, double* param, double fmin){
   ret_val.param = param;
   ret_val.value = fmin;
 
-  Free(o);
-  Free(param_work);
-  Free(w_tmp);
+  free(o);
+  free(param_work);
+  free(w_tmp);
 
   return ret_val;
 }

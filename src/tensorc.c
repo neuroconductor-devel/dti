@@ -36,9 +36,9 @@ double ftens(int param_length, double *param, void* ex){
 
   double result = 0;
 
-  double* gv = Calloc(ngradd, double);
-//  double* sigi = Calloc(ngradd, double);
-//  double* varinvi = Calloc(ngradd, double);
+  double* gv = calloc(ngradd, sizeof(double));
+//  double* sigi = calloc(ngradd, sizeof(double));
+//  double* varinvi = calloc(ngradd, sizeof(double));
 //  int i;
 //  Rprintf("vari and sigi %f%f",varinv[100],signal[100]);
 //  Rprintf("ngradd %i",ngradd);
@@ -51,19 +51,19 @@ double ftens(int param_length, double *param, void* ex){
 // calculate risk for tensor model
   F77_CALL(ftensor)(param, sigi, &ngradd, btb, varinv, gv, &result);
 
-//  Free(varinvi);
-//  Free(sigi);
-  Free(gv);
+//  free(varinvi);
+//  free(sigi);
+  free(gv);
   return result;
 }
 
 
 void gtens(int param_length, double* param, double* result, void* ex){
 
-  double* gv = Calloc(ngradd, double);
-  double* fv = Calloc(ngradd, double);
-//  double* sigi = Calloc(ngradd, double);
-//  double* varinvi = Calloc(ngradd, double);
+  double* gv = calloc(ngradd, sizeof(double));
+  double* fv = calloc(ngradd, sizeof(double));
+//  double* sigi = calloc(ngradd, sizeof(double));
+//  double* varinvi = calloc(ngradd, sizeof(double));
 // calculate gradient of risk for tensor model
 
 //  int i;
@@ -73,10 +73,10 @@ void gtens(int param_length, double* param, double* result, void* ex){
   }*/
   F77_CALL(gtensor)(param, sigi, &ngradd, btb, varinv, gv, fv, result);
 
-//  Free(varinvi);
-//  Free(sigi);
-  Free(fv);
-  Free(gv);
+//  free(varinvi);
+//  free(sigi);
+  free(fv);
+  free(gv);
 }
 
 void dtens( int* n1, double* param, double* sig_in, int* ngrad, double* btb_in,

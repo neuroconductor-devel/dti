@@ -140,11 +140,11 @@ void paroforient(double *dir, double *angles){
 double mfunpl0(int param_length, double *param, void* ex){
 
   int m = (param_length-1)/2;
-  double* z = Calloc(ngrad0c*m, double);
-  double* w = Calloc(ngrad0c, double);
+  double* z = calloc(ngrad0c*m, sizeof(double));
+  double* w = calloc(ngrad0c, sizeof(double));
   double result = 0;
 
-  double* siq = Calloc(ngrad0c,double);
+  double* siq = calloc(ngrad0c, sizeof(double));
   int i;
   for(i=0;i<ngrad0c;i++){
     siq[i] = siq_init[i+i1*ngrad0c];
@@ -159,9 +159,9 @@ double mfunpl0(int param_length, double *param, void* ex){
     return 0;
   }
 
-  Free(z);
-  Free(w);
-  Free(siq);
+  free(z);
+  free(w);
+  free(siq);
 
   return result;
 }
@@ -173,26 +173,26 @@ void gmfunpl0(int param_length, double* param, double* result, void* ex){
 
   int m = (param_length-1)/2;
 
-  double* z = Calloc(ngrad0c*m, double);
-  double* v = Calloc(m*m, double);
-  double* w = Calloc(ngrad0c, double);
-  double* dkgj = Calloc(ngrad0c*m, double);
-  double* dkgj2 = Calloc(ngrad0c*m, double);
-  double* ddkdphig = Calloc(ngrad0c*m, double);
-  double* ddkgetag = Calloc(ngrad0c*m, double);
-  double* dvdth = Calloc(m*m, double);
-  double* dvdphi = Calloc(m*m*m, double);
-  double* dvdeta = Calloc(m*m*m, double);
-  double* dzdpars = Calloc(ngrad0c*m*3, double);
-  double* dwdpars = Calloc(m*param_length, double);
-  double* dwdpars2 = Calloc(m*param_length, double);
-  double* zs = Calloc(ngrad0c*m, double);
-  double* work1 = Calloc(ngrad0c*m, double);
-  double* work2 = Calloc(ngrad0c*m, double);
-  double* scopy = Calloc(ngrad0c, double);
+  double* z = calloc(ngrad0c*m, sizeof(double));
+  double* v = calloc(m*m, sizeof(double));
+  double* w = calloc(ngrad0c, sizeof(double));
+  double* dkgj = calloc(ngrad0c*m, sizeof(double));
+  double* dkgj2 = calloc(ngrad0c*m, sizeof(double));
+  double* ddkdphig = calloc(ngrad0c*m, sizeof(double));
+  double* ddkgetag = calloc(ngrad0c*m, sizeof(double));
+  double* dvdth = calloc(m*m, sizeof(double));
+  double* dvdphi = calloc(m*m*m, sizeof(double));
+  double* dvdeta = calloc(m*m*m, sizeof(double));
+  double* dzdpars = calloc(ngrad0c*m*3, sizeof(double));
+  double* dwdpars = calloc(m*param_length, sizeof(double));
+  double* dwdpars2 = calloc(m*param_length, sizeof(double));
+  double* zs = calloc(ngrad0c*m, sizeof(double));
+  double* work1 = calloc(ngrad0c*m, sizeof(double));
+  double* work2 = calloc(ngrad0c*m, sizeof(double));
+  double* scopy = calloc(ngrad0c, sizeof(double));
 
   int i;
-  double* siq = Calloc(ngrad0c, double);
+  double* siq = calloc(ngrad0c, sizeof(double));
   for(i=0;i<ngrad0c;i++){
    siq[i] = siq_init[get_ind2d(i,i1,ngrad0c)];
   }
@@ -201,24 +201,24 @@ void gmfunpl0(int param_length, double* param, double* result, void* ex){
            z, v, w, dkgj, dkgj2, ddkdphig, ddkgetag,
            dvdth, dvdphi, dvdeta, dzdpars, dwdpars, dwdpars2, zs, work1, work2, scopy,
            &pen, result);
-  Free(siq);
-  Free(z);
-  Free(v);
-  Free(w);
-  Free(dkgj);
-  Free(dkgj2);
-  Free(ddkdphig);
-  Free(ddkgetag);
-  Free(dvdth);
-  Free(dvdphi);
-  Free(dvdeta);
-  Free(dzdpars);
-  Free(dwdpars);
-  Free(dwdpars2);
-  Free(zs);
-  Free(work1);
-  Free(work2);
-  Free(scopy);
+  free(siq);
+  free(z);
+  free(v);
+  free(w);
+  free(dkgj);
+  free(dkgj2);
+  free(ddkdphig);
+  free(ddkgetag);
+  free(dvdth);
+  free(dvdphi);
+  free(dvdeta);
+  free(dzdpars);
+  free(dwdpars);
+  free(dwdpars2);
+  free(zs);
+  free(work1);
+  free(work2);
+  free(scopy);
 }
 
 
@@ -241,11 +241,11 @@ mfunplwghts0_ret mfunplwghts0(int param_length, double* param, double* siq){
 
   double pen = 100;
   double tmp2 = 0;
-  double* param_work = Calloc(param_length, double);
-  double* tmp = Calloc(ngrad0c*m, double);
-  double* w = Calloc(ngrad0c, double);
-  double* w_red = Calloc(m, double);
-  double* w_red2 = Calloc(m, double);
+  double* param_work = calloc(param_length, sizeof(double));
+  double* tmp = calloc(ngrad0c*m, sizeof(double));
+  double* w = calloc(ngrad0c, sizeof(double));
+  double* w_red = calloc(m, sizeof(double));
+  double* w_red2 = calloc(m, sizeof(double));
 
   //copy param
    for( i = 0; i < param_length; i++){
@@ -261,8 +261,8 @@ mfunplwghts0_ret mfunplwghts0(int param_length, double* param, double* siq){
           &pen, tmp, w, &tmp2);
 
   tmp2 = 0;
-//  Free(tmp);
-//  tmp = Calloc(ngrad0c*m, double);
+//  free(tmp);
+//  tmp = calloc(ngrad0c*m, sizeof(double));
 
   for(i = 0; i < m; i++){
     if(w[i] > 0){
@@ -291,7 +291,7 @@ mfunplwghts0_ret mfunplwghts0(int param_length, double* param, double* siq){
   }
 
   qsort(w_red, (long unsigned int) m, sizeof(double), compare_doubles);
-  int* o = Calloc(m, int);
+  int* o = calloc(m, sizeof(int));
   for(i = 0; i<m; i++){
    o[i] = -1;
   }
@@ -369,12 +369,12 @@ mfunplwghts0_ret mfunplwghts0(int param_length, double* param, double* siq){
   ret_val.orient = or;
   ret_val.mix = mix;
 
-  Free(tmp);
-  Free(param_work);
-  Free(w);
-  Free(w_red);
-  Free(w_red2);
-  Free(o);
+  free(tmp);
+  free(param_work);
+  free(w);
+  free(w_red);
+  free(w_red2);
+  free(o);
 
   return ret_val;
 }
